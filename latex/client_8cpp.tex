@@ -1,0 +1,197 @@
+\hypertarget{client_8cpp}{
+\section{client.cpp File Reference}
+\label{client_8cpp}\index{client.cpp@{client.cpp}}
+}
+
+
+Allow for communication between clients and connecting to server to prepare for client2client communications.  
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$errno.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$sys/types.h$>$}\par
+{\ttfamily \#include $<$sys/socket.h$>$}\par
+{\ttfamily \#include $<$netinet/in.h$>$}\par
+{\ttfamily \#include $<$sys/ipc.h$>$}\par
+{\ttfamily \#include $<$sys/shm.h$>$}\par
+{\ttfamily \#include $<$sys/msg.h$>$}\par
+{\ttfamily \#include $<$arpa/inet.h$>$}\par
+{\ttfamily \#include $<$termios.h$>$}\par
+{\ttfamily \#include $<$semaphore.h$>$}\par
+{\ttfamily \#include $<$vector$>$}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structLOCAL__INFO}{LOCAL\_\-INFO}
+\begin{DoxyCompactList}\small\item\em The struct that was going to be used for client message. \item\end{DoxyCompactList}\item 
+struct \hyperlink{structLOCAL__DIR}{LOCAL\_\-DIR}
+\begin{DoxyCompactList}\small\item\em The struct that was goning to be used to store an array of \hyperlink{structLOCAL__INFO}{LOCAL\_\-INFO}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{client_8cpp_a0a8f91f93d75a07f0ae45077db45b3eb}{
+\#define {\bfseries MAX\_\-CLIENTS}~5}
+\label{client_8cpp_a0a8f91f93d75a07f0ae45077db45b3eb}
+
+\item 
+\hypertarget{client_8cpp_a20308044cb60e1338c20d7aa1431562e}{
+\#define {\bfseries LOOKUP\_\-SERVER}~\char`\"{}156.12.127.18\char`\"{}}
+\label{client_8cpp_a20308044cb60e1338c20d7aa1431562e}
+
+\item 
+\hypertarget{client_8cpp_af40ec5de590bb807d7cb489dd593ef4f}{
+\#define {\bfseries LOOKUP\_\-SRV\_\-PORT}~15020}
+\label{client_8cpp_af40ec5de590bb807d7cb489dd593ef4f}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{client_8cpp_ad23a6faf4d7fedbd861840915ba5058a}{client\_\-messages} (int cli, int srv)
+\begin{DoxyCompactList}\small\item\em Sets up select and handles all communication for the client. \item\end{DoxyCompactList}\item 
+void \hyperlink{client_8cpp_acab55180ce1b94ea9f1a96c942618897}{send\_\-client\_\-message} (int cli, int srv, string nick, string msg)
+\begin{DoxyCompactList}\small\item\em Sends a message to another client by requesting its socket. \item\end{DoxyCompactList}\item 
+int \hyperlink{client_8cpp_a29b4d7a3aab36c85b8685adc7e41ab26}{send\_\-msg} (int sockid, string msg, const sockaddr\_\-in $\ast$udp)
+\begin{DoxyCompactList}\small\item\em Used for sending messages over a socket. \item\end{DoxyCompactList}\item 
+string \hyperlink{client_8cpp_aadeddacb36b7dd77098ee9da32fb9a05}{recv\_\-msg} (int sockid)
+\begin{DoxyCompactList}\small\item\em Gets a message from the client or server. \item\end{DoxyCompactList}\item 
+vector$<$ string $>$ \hyperlink{client_8cpp_a1dfa2aa3e9a408c954e3299a8553217e}{str\_\-split} (string str, char token)
+\begin{DoxyCompactList}\small\item\em Takes a string and splits into a string vector. \item\end{DoxyCompactList}\item 
+string \hyperlink{client_8cpp_acd529c52fdff0d47494fd915223c941b}{str\_\-combine} (int pos, vector$<$ string $>$ vec, char token)
+\begin{DoxyCompactList}\small\item\em Takes a split vector string and combines it back together. \item\end{DoxyCompactList}\item 
+string \hyperlink{client_8cpp_ad02573bc436719d4f911314557582217}{to\_\-lower} (string)
+\begin{DoxyCompactList}\small\item\em Takes a string and makes it all lower case. \item\end{DoxyCompactList}\item 
+\hypertarget{client_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{
+int {\bfseries main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})}
+\label{client_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{client_8cpp_a3c845efac28f19d6345d0f629498de7b}{
+sockaddr\_\-in {\bfseries udp\_\-server}}
+\label{client_8cpp_a3c845efac28f19d6345d0f629498de7b}
+
+\item 
+\hypertarget{client_8cpp_ac8807d215d2ee6d9779d76aeb1147430}{
+int {\bfseries shmid}}
+\label{client_8cpp_ac8807d215d2ee6d9779d76aeb1147430}
+
+\item 
+\hypertarget{client_8cpp_aa4b31ae157a3bae6158e82d42243c994}{
+void $\ast$ {\bfseries shmptr}}
+\label{client_8cpp_aa4b31ae157a3bae6158e82d42243c994}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Allow for communication between clients and connecting to server to prepare for client2client communications. \begin{DoxyAuthor}{Author}
+Patrick Earl 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2018-\/12-\/10 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{client_8cpp_ad23a6faf4d7fedbd861840915ba5058a}{
+\index{client.cpp@{client.cpp}!client\_\-messages@{client\_\-messages}}
+\index{client\_\-messages@{client\_\-messages}!client.cpp@{client.cpp}}
+\subsubsection[{client\_\-messages}]{\setlength{\rightskip}{0pt plus 5cm}void client\_\-messages (int {\em cli}, \/  int {\em srv})}}
+\label{client_8cpp_ad23a6faf4d7fedbd861840915ba5058a}
+
+
+Sets up select and handles all communication for the client. 
+\begin{DoxyParams}{Parameters}
+\item[{\em cli}]-\/ The socket to talk to LOOKUP\_\-SERVER \item[{\em srv}]-\/ The socket to listen on for UDP messages from other clients \end{DoxyParams}
+\hypertarget{client_8cpp_aadeddacb36b7dd77098ee9da32fb9a05}{
+\index{client.cpp@{client.cpp}!recv\_\-msg@{recv\_\-msg}}
+\index{recv\_\-msg@{recv\_\-msg}!client.cpp@{client.cpp}}
+\subsubsection[{recv\_\-msg}]{\setlength{\rightskip}{0pt plus 5cm}string recv\_\-msg (int {\em sockid})}}
+\label{client_8cpp_aadeddacb36b7dd77098ee9da32fb9a05}
+
+
+Gets a message from the client or server. Recieves a message from a client -\/ Handles the same packet.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em sockid}]-\/ The socket to recieve from \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ The message
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em sockid}]-\/ The socket to recieve on \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ The message recieved from the client 
+\end{DoxyReturn}
+\hypertarget{client_8cpp_acab55180ce1b94ea9f1a96c942618897}{
+\index{client.cpp@{client.cpp}!send\_\-client\_\-message@{send\_\-client\_\-message}}
+\index{send\_\-client\_\-message@{send\_\-client\_\-message}!client.cpp@{client.cpp}}
+\subsubsection[{send\_\-client\_\-message}]{\setlength{\rightskip}{0pt plus 5cm}void send\_\-client\_\-message (int {\em cli}, \/  int {\em srv}, \/  string {\em nick}, \/  string {\em msg})}}
+\label{client_8cpp_acab55180ce1b94ea9f1a96c942618897}
+
+
+Sends a message to another client by requesting its socket. 
+\begin{DoxyParams}{Parameters}
+\item[{\em cli}]-\/ The socket to the LOOKUP\_\-SERVER \item[{\em srv}]-\/ The socket to the UDP server \item[{\em nick}]-\/ The nickname to send too \item[{\em msg}]-\/ The message \end{DoxyParams}
+\hypertarget{client_8cpp_a29b4d7a3aab36c85b8685adc7e41ab26}{
+\index{client.cpp@{client.cpp}!send\_\-msg@{send\_\-msg}}
+\index{send\_\-msg@{send\_\-msg}!client.cpp@{client.cpp}}
+\subsubsection[{send\_\-msg}]{\setlength{\rightskip}{0pt plus 5cm}int send\_\-msg (int {\em sockid}, \/  string {\em msg}, \/  const sockaddr\_\-in $\ast$ {\em udp})}}
+\label{client_8cpp_a29b4d7a3aab36c85b8685adc7e41ab26}
+
+
+Used for sending messages over a socket. 
+\begin{DoxyParams}{Parameters}
+\item[{\em sockid}]-\/ The socket to send on \item[{\em msg}]-\/ The message \item[{\em udp}]-\/ The sockaddr\_\-in if its a UDP message -\/ Default NULL \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/ The return value of send 
+\end{DoxyReturn}
+\hypertarget{client_8cpp_acd529c52fdff0d47494fd915223c941b}{
+\index{client.cpp@{client.cpp}!str\_\-combine@{str\_\-combine}}
+\index{str\_\-combine@{str\_\-combine}!client.cpp@{client.cpp}}
+\subsubsection[{str\_\-combine}]{\setlength{\rightskip}{0pt plus 5cm}string str\_\-combine (int {\em pos}, \/  vector$<$ string $>$ {\em vec}, \/  char {\em token})}}
+\label{client_8cpp_acd529c52fdff0d47494fd915223c941b}
+
+
+Takes a split vector string and combines it back together. 
+\begin{DoxyParams}{Parameters}
+\item[{\em pos}]The position to start combining the vector at \item[{\em vec}]-\/ The vector to combine \item[{\em token}]-\/ The token to join on \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ The combined string 
+\end{DoxyReturn}
+\hypertarget{client_8cpp_a1dfa2aa3e9a408c954e3299a8553217e}{
+\index{client.cpp@{client.cpp}!str\_\-split@{str\_\-split}}
+\index{str\_\-split@{str\_\-split}!client.cpp@{client.cpp}}
+\subsubsection[{str\_\-split}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ string $>$ str\_\-split (string {\em str}, \/  char {\em token})}}
+\label{client_8cpp_a1dfa2aa3e9a408c954e3299a8553217e}
+
+
+Takes a string and splits into a string vector. 
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]-\/ The string to split \item[{\em token}]-\/ The token to split on Default: ' ' \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$string$>$ -\/ The split string 
+\end{DoxyReturn}
+\hypertarget{client_8cpp_ad02573bc436719d4f911314557582217}{
+\index{client.cpp@{client.cpp}!to\_\-lower@{to\_\-lower}}
+\index{to\_\-lower@{to\_\-lower}!client.cpp@{client.cpp}}
+\subsubsection[{to\_\-lower}]{\setlength{\rightskip}{0pt plus 5cm}string to\_\-lower (string {\em str})}}
+\label{client_8cpp_ad02573bc436719d4f911314557582217}
+
+
+Takes a string and makes it all lower case. 
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]-\/ The string \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ The lowercase string 
+\end{DoxyReturn}

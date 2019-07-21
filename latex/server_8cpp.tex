@@ -1,0 +1,369 @@
+\hypertarget{server_8cpp}{
+\section{server.cpp File Reference}
+\label{server_8cpp}\index{server.cpp@{server.cpp}}
+}
+
+
+LOOKUP\_\-SERVER provides a directory to allow for clients to communicate.  
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$bits/stdc++.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$errno.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$sys/types.h$>$}\par
+{\ttfamily \#include $<$sys/socket.h$>$}\par
+{\ttfamily \#include $<$sys/ipc.h$>$}\par
+{\ttfamily \#include $<$sys/shm.h$>$}\par
+{\ttfamily \#include $<$sys/sem.h$>$}\par
+{\ttfamily \#include $<$netinet/in.h$>$}\par
+{\ttfamily \#include $<$arpa/inet.h$>$}\par
+{\ttfamily \#include $<$semaphore.h$>$}\par
+{\ttfamily \#include $<$vector$>$}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structclientStruct}{clientStruct}
+\begin{DoxyCompactList}\small\item\em Stores information about a connected client. \item\end{DoxyCompactList}\item 
+struct \hyperlink{structDIR}{DIR}
+\begin{DoxyCompactList}\small\item\em Stores an array of struct \hyperlink{structclientStruct}{clientStruct} and the number of connected clients. \item\end{DoxyCompactList}\item 
+struct \hyperlink{structCLIENT__PORT}{CLIENT\_\-PORT}
+\begin{DoxyCompactList}\small\item\em Stores information about a client port (Is it in use?). \item\end{DoxyCompactList}\item 
+struct \hyperlink{structCLIENT__PORTS}{CLIENT\_\-PORTS}
+\begin{DoxyCompactList}\small\item\em Struct to hold an array of \hyperlink{structCLIENT__PORTS}{CLIENT\_\-PORTS}. \item\end{DoxyCompactList}\item 
+union \hyperlink{unionsemun}{semun}
+\begin{DoxyCompactList}\small\item\em Used for creating semaphores on different machines. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{server_8cpp_a0a8f91f93d75a07f0ae45077db45b3eb}{
+\#define {\bfseries MAX\_\-CLIENTS}~10}
+\label{server_8cpp_a0a8f91f93d75a07f0ae45077db45b3eb}
+
+\item 
+\hypertarget{server_8cpp_ab85c0d94c7782db37b9b968df6d0606e}{
+\#define {\bfseries HOST\_\-ADDRESS}~\char`\"{}156.12.127.18\char`\"{}}
+\label{server_8cpp_ab85c0d94c7782db37b9b968df6d0606e}
+
+\item 
+\hypertarget{server_8cpp_ae5e13f97257b3bdd6acdaba261a9c21b}{
+\#define {\bfseries HOST\_\-PORT}~15020}
+\label{server_8cpp_ae5e13f97257b3bdd6acdaba261a9c21b}
+
+\item 
+\hypertarget{server_8cpp_af0552ed7f0df9a84e3ba09a948d8fc02}{
+\#define {\bfseries CLIENT\_\-PORT\_\-MIN}~15200}
+\label{server_8cpp_af0552ed7f0df9a84e3ba09a948d8fc02}
+
+\item 
+\hypertarget{server_8cpp_ac8e52150c513ad98629405d66d5afac8}{
+\#define {\bfseries CLIENT\_\-PORT\_\-MAX}~15224}
+\label{server_8cpp_ac8e52150c513ad98629405d66d5afac8}
+
+\item 
+\hypertarget{server_8cpp_a97f653647c2fe0261747be3ad2334486}{
+\#define {\bfseries NUM\_\-SEM}~2}
+\label{server_8cpp_a97f653647c2fe0261747be3ad2334486}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{server_8cpp_aa239ab5a6704dda21c5071b32a3cf3a8}{
+void \hyperlink{server_8cpp_aa239ab5a6704dda21c5071b32a3cf3a8}{init\_\-ports} ()}
+\label{server_8cpp_aa239ab5a6704dda21c5071b32a3cf3a8}
+
+\begin{DoxyCompactList}\small\item\em Initalizes the ports for the server. \item\end{DoxyCompactList}\item 
+int \hyperlink{server_8cpp_ac95cce0b3a2123cc408859183557ab80}{get\_\-port} ()
+\begin{DoxyCompactList}\small\item\em Returns an available port. \item\end{DoxyCompactList}\item 
+void \hyperlink{server_8cpp_a60af078c2dae1284da62d2e0895d593b}{abnormal\_\-shutdown} (int soc)
+\begin{DoxyCompactList}\small\item\em Used to shutdown the server when something unexpected has happened. \item\end{DoxyCompactList}\item 
+void \hyperlink{server_8cpp_a870a183611554dff22a95f0f6eafd4a4}{client\_\-handler} (int cli\_\-fd, sockaddr\_\-in cli\_\-sock)
+\begin{DoxyCompactList}\small\item\em Where a child lookup\_\-server oes to handle the client. \item\end{DoxyCompactList}\item 
+void \hyperlink{server_8cpp_a9f880581a01cd111e3850a4c7a199b18}{print\_\-client\_\-msg} (int clientid, string msg)
+\begin{DoxyCompactList}\small\item\em Used to print a message from a specfic child. \item\end{DoxyCompactList}\item 
+int \hyperlink{server_8cpp_ae9e0a2d818b07f1197c50149b98a0764}{name\_\-in\_\-use} (string name)
+\begin{DoxyCompactList}\small\item\em Checks if a name is use. \item\end{DoxyCompactList}\item 
+void \hyperlink{server_8cpp_a8e58653e1894c31c63bcf21a4d903100}{send\_\-struct\_\-info} (string nick, int cli)
+\begin{DoxyCompactList}\small\item\em When a client wants to send a function, this function will send over the needed information for the client to so. \item\end{DoxyCompactList}\item 
+void \hyperlink{server_8cpp_a02af8d764c5e19faff26bf6f7b5416fb}{send\_\-connected\_\-clients} (int cli\_\-fd)
+\begin{DoxyCompactList}\small\item\em Sends a list of the connected clients in LOOKUP\_\-SERVER. \item\end{DoxyCompactList}\item 
+\hypertarget{server_8cpp_a70d5b121f57173fb714626cef51c1c56}{
+void \hyperlink{server_8cpp_a70d5b121f57173fb714626cef51c1c56}{reader\_\-lock} ()}
+\label{server_8cpp_a70d5b121f57173fb714626cef51c1c56}
+
+\begin{DoxyCompactList}\small\item\em Looks the CS to allow for a reader to access it Locks writers from accessing. \item\end{DoxyCompactList}\item 
+\hypertarget{server_8cpp_aa52556e9ed1b2655199a8f1f9c0d21e1}{
+void \hyperlink{server_8cpp_aa52556e9ed1b2655199a8f1f9c0d21e1}{writer\_\-lock} ()}
+\label{server_8cpp_aa52556e9ed1b2655199a8f1f9c0d21e1}
+
+\begin{DoxyCompactList}\small\item\em Locks the CS for writers. \item\end{DoxyCompactList}\item 
+\hypertarget{server_8cpp_a2dd3be8faf6451a0959c59bbd2340257}{
+void \hyperlink{server_8cpp_a2dd3be8faf6451a0959c59bbd2340257}{reader\_\-unlock} ()}
+\label{server_8cpp_a2dd3be8faf6451a0959c59bbd2340257}
+
+\begin{DoxyCompactList}\small\item\em Unlocks the CS after a reader gets it Unlocks writers if last reader. \item\end{DoxyCompactList}\item 
+\hypertarget{server_8cpp_af3be18ea95e40418f100dc5412b6f434}{
+void \hyperlink{server_8cpp_af3be18ea95e40418f100dc5412b6f434}{writer\_\-unlock} ()}
+\label{server_8cpp_af3be18ea95e40418f100dc5412b6f434}
+
+\begin{DoxyCompactList}\small\item\em Unlocks the CS for the writers. \item\end{DoxyCompactList}\item 
+void \hyperlink{server_8cpp_a738426cfcd04e9a1dca874bf9bfe2f33}{P} (int id)
+\begin{DoxyCompactList}\small\item\em Grabs the lock for the semaphore. \item\end{DoxyCompactList}\item 
+void \hyperlink{server_8cpp_ad4f0a0af56e6cbbe8c3421d8ec714fa6}{V} (int id)
+\begin{DoxyCompactList}\small\item\em Lets the lock go for the semaphore. \item\end{DoxyCompactList}\item 
+vector$<$ string $>$ \hyperlink{server_8cpp_aba2d00f8a99c233d28863c830df3fd15}{str\_\-split} (string str, char token)
+\begin{DoxyCompactList}\small\item\em Takes a string and splits into a string vector. \item\end{DoxyCompactList}\item 
+string \hyperlink{server_8cpp_acd529c52fdff0d47494fd915223c941b}{str\_\-combine} (int pos, vector$<$ string $>$ vec, char token)
+\begin{DoxyCompactList}\small\item\em Takes a split vector string and combines it back together. \item\end{DoxyCompactList}\item 
+string \hyperlink{server_8cpp_a175c09f4dd01c8ae3f1ef6392a8f865a}{to\_\-lower} (string str)
+\begin{DoxyCompactList}\small\item\em Takes a string and makes it all lower case. \item\end{DoxyCompactList}\item 
+int \hyperlink{server_8cpp_a5ecba3b644130eabad022566a59a3530}{send\_\-msg} (int sockid, string msg)
+\begin{DoxyCompactList}\small\item\em Used to send a message to a client $|$ Creates a crappy form of a packet. \item\end{DoxyCompactList}\item 
+string \hyperlink{server_8cpp_aadeddacb36b7dd77098ee9da32fb9a05}{recv\_\-msg} (int sockid)
+\begin{DoxyCompactList}\small\item\em Recieves a message from a client -\/ Handles the same packet. \item\end{DoxyCompactList}\item 
+void \hyperlink{server_8cpp_a8bfc90b3fb9344e9caafec953baacc0b}{handle\_\-sigint} (int sig)
+\begin{DoxyCompactList}\small\item\em Handles the event handler. \item\end{DoxyCompactList}\item 
+\hypertarget{server_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{
+int {\bfseries main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})}
+\label{server_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+
+\item 
+void \hyperlink{server_8cpp_a68927b5e9036dfa4c076ed3c306f13c9}{free\_\-port} (int port)
+\begin{DoxyCompactList}\small\item\em Frees up the port. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{server_8cpp_aa4b31ae157a3bae6158e82d42243c994}{
+void $\ast$ {\bfseries shmptr}}
+\label{server_8cpp_aa4b31ae157a3bae6158e82d42243c994}
+
+\item 
+\hypertarget{server_8cpp_ac8807d215d2ee6d9779d76aeb1147430}{
+int {\bfseries shmid}}
+\label{server_8cpp_ac8807d215d2ee6d9779d76aeb1147430}
+
+\item 
+\hypertarget{server_8cpp_a7c35ac5305085cf7360645b8d52988b5}{
+int {\bfseries semid}}
+\label{server_8cpp_a7c35ac5305085cf7360645b8d52988b5}
+
+\item 
+\hypertarget{server_8cpp_ab00b512352bc6692e4796b1c1b8f6811}{
+int $\ast$ {\bfseries readerscnt}}
+\label{server_8cpp_ab00b512352bc6692e4796b1c1b8f6811}
+
+\item 
+\hypertarget{server_8cpp_a77ca688b43ff27c8aa0cb85b6a6836aa}{
+\hyperlink{structDIR}{DIR} $\ast$ {\bfseries shared\_\-dir}}
+\label{server_8cpp_a77ca688b43ff27c8aa0cb85b6a6836aa}
+
+\item 
+\hypertarget{server_8cpp_a8977501a66dc8c059d037b6d01ea76ae}{
+\hyperlink{structCLIENT__PORTS}{CLIENT\_\-PORTS} $\ast$ {\bfseries shared\_\-port}}
+\label{server_8cpp_a8977501a66dc8c059d037b6d01ea76ae}
+
+\item 
+\hypertarget{server_8cpp_a87fdf770430098f0bf2a4e540804aaf2}{
+int {\bfseries num\_\-fds} = 0}
+\label{server_8cpp_a87fdf770430098f0bf2a4e540804aaf2}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+LOOKUP\_\-SERVER provides a directory to allow for clients to communicate. \begin{DoxyAuthor}{Author}
+Patrick Earl 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2018-\/12-\/10 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{server_8cpp_a60af078c2dae1284da62d2e0895d593b}{
+\index{server.cpp@{server.cpp}!abnormal\_\-shutdown@{abnormal\_\-shutdown}}
+\index{abnormal\_\-shutdown@{abnormal\_\-shutdown}!server.cpp@{server.cpp}}
+\subsubsection[{abnormal\_\-shutdown}]{\setlength{\rightskip}{0pt plus 5cm}void abnormal\_\-shutdown (int {\em soc})}}
+\label{server_8cpp_a60af078c2dae1284da62d2e0895d593b}
+
+
+Used to shutdown the server when something unexpected has happened. 
+\begin{DoxyParams}{Parameters}
+\item[{\em soc}]Pass the socket for the TCP server \end{DoxyParams}
+\hypertarget{server_8cpp_a870a183611554dff22a95f0f6eafd4a4}{
+\index{server.cpp@{server.cpp}!client\_\-handler@{client\_\-handler}}
+\index{client\_\-handler@{client\_\-handler}!server.cpp@{server.cpp}}
+\subsubsection[{client\_\-handler}]{\setlength{\rightskip}{0pt plus 5cm}void client\_\-handler (int {\em cli\_\-fd}, \/  sockaddr\_\-in {\em cli\_\-sock})}}
+\label{server_8cpp_a870a183611554dff22a95f0f6eafd4a4}
+
+
+Where a child lookup\_\-server oes to handle the client. 
+\begin{DoxyParams}{Parameters}
+\item[{\em cli\_\-fd}]-\/ The socket to talk to the client \item[{\em cli\_\-sock}]-\/ The client's sockaddr\_\-in returned from accept \end{DoxyParams}
+\hypertarget{server_8cpp_a68927b5e9036dfa4c076ed3c306f13c9}{
+\index{server.cpp@{server.cpp}!free\_\-port@{free\_\-port}}
+\index{free\_\-port@{free\_\-port}!server.cpp@{server.cpp}}
+\subsubsection[{free\_\-port}]{\setlength{\rightskip}{0pt plus 5cm}void free\_\-port (int {\em port})}}
+\label{server_8cpp_a68927b5e9036dfa4c076ed3c306f13c9}
+
+
+Frees up the port. 
+\begin{DoxyParams}{Parameters}
+\item[{\em port}]The port to free up \end{DoxyParams}
+\hypertarget{server_8cpp_ac95cce0b3a2123cc408859183557ab80}{
+\index{server.cpp@{server.cpp}!get\_\-port@{get\_\-port}}
+\index{get\_\-port@{get\_\-port}!server.cpp@{server.cpp}}
+\subsubsection[{get\_\-port}]{\setlength{\rightskip}{0pt plus 5cm}int get\_\-port ()}}
+\label{server_8cpp_ac95cce0b3a2123cc408859183557ab80}
+
+
+Returns an available port. \begin{DoxyReturn}{Returns}
+int -\/ Returns a port if free, -\/1 if no port free 
+\end{DoxyReturn}
+\hypertarget{server_8cpp_a8bfc90b3fb9344e9caafec953baacc0b}{
+\index{server.cpp@{server.cpp}!handle\_\-sigint@{handle\_\-sigint}}
+\index{handle\_\-sigint@{handle\_\-sigint}!server.cpp@{server.cpp}}
+\subsubsection[{handle\_\-sigint}]{\setlength{\rightskip}{0pt plus 5cm}void handle\_\-sigint (int {\em sig})}}
+\label{server_8cpp_a8bfc90b3fb9344e9caafec953baacc0b}
+
+
+Handles the event handler. 
+\begin{DoxyParams}{Parameters}
+\item[{\em sig}]-\/ Which singal was passed \end{DoxyParams}
+\hypertarget{server_8cpp_ae9e0a2d818b07f1197c50149b98a0764}{
+\index{server.cpp@{server.cpp}!name\_\-in\_\-use@{name\_\-in\_\-use}}
+\index{name\_\-in\_\-use@{name\_\-in\_\-use}!server.cpp@{server.cpp}}
+\subsubsection[{name\_\-in\_\-use}]{\setlength{\rightskip}{0pt plus 5cm}int name\_\-in\_\-use (string {\em name})}}
+\label{server_8cpp_ae9e0a2d818b07f1197c50149b98a0764}
+
+
+Checks if a name is use. 
+\begin{DoxyParams}{Parameters}
+\item[{\em name}]-\/ The name to check \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int
+\begin{DoxyItemize}
+\item Returns the index in DIRS-\/$>$clientInfo that has the nextname
+\item Returns -\/1 if name is not found 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{server_8cpp_a738426cfcd04e9a1dca874bf9bfe2f33}{
+\index{server.cpp@{server.cpp}!P@{P}}
+\index{P@{P}!server.cpp@{server.cpp}}
+\subsubsection[{P}]{\setlength{\rightskip}{0pt plus 5cm}void P (int {\em id})}}
+\label{server_8cpp_a738426cfcd04e9a1dca874bf9bfe2f33}
+
+
+Grabs the lock for the semaphore. 
+\begin{DoxyParams}{Parameters}
+\item[{\em id}]-\/ Which semaphore to lock \end{DoxyParams}
+\hypertarget{server_8cpp_a9f880581a01cd111e3850a4c7a199b18}{
+\index{server.cpp@{server.cpp}!print\_\-client\_\-msg@{print\_\-client\_\-msg}}
+\index{print\_\-client\_\-msg@{print\_\-client\_\-msg}!server.cpp@{server.cpp}}
+\subsubsection[{print\_\-client\_\-msg}]{\setlength{\rightskip}{0pt plus 5cm}void print\_\-client\_\-msg (int {\em clientid}, \/  string {\em msg})}}
+\label{server_8cpp_a9f880581a01cd111e3850a4c7a199b18}
+
+
+Used to print a message from a specfic child. 
+\begin{DoxyParams}{Parameters}
+\item[{\em clientid}]-\/ The index in \hyperlink{structDIR}{DIR} \item[{\em msg}]-\/ The message to print \end{DoxyParams}
+\hypertarget{server_8cpp_aadeddacb36b7dd77098ee9da32fb9a05}{
+\index{server.cpp@{server.cpp}!recv\_\-msg@{recv\_\-msg}}
+\index{recv\_\-msg@{recv\_\-msg}!server.cpp@{server.cpp}}
+\subsubsection[{recv\_\-msg}]{\setlength{\rightskip}{0pt plus 5cm}string recv\_\-msg (int {\em sockid})}}
+\label{server_8cpp_aadeddacb36b7dd77098ee9da32fb9a05}
+
+
+Recieves a message from a client -\/ Handles the same packet. 
+\begin{DoxyParams}{Parameters}
+\item[{\em sockid}]-\/ The socket to recieve on \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ The message recieved from the client 
+\end{DoxyReturn}
+\hypertarget{server_8cpp_a02af8d764c5e19faff26bf6f7b5416fb}{
+\index{server.cpp@{server.cpp}!send\_\-connected\_\-clients@{send\_\-connected\_\-clients}}
+\index{send\_\-connected\_\-clients@{send\_\-connected\_\-clients}!server.cpp@{server.cpp}}
+\subsubsection[{send\_\-connected\_\-clients}]{\setlength{\rightskip}{0pt plus 5cm}void send\_\-connected\_\-clients (int {\em cli\_\-fd})}}
+\label{server_8cpp_a02af8d764c5e19faff26bf6f7b5416fb}
+
+
+Sends a list of the connected clients in LOOKUP\_\-SERVER. 
+\begin{DoxyParams}{Parameters}
+\item[{\em cli\_\-fd}]-\/ The client fd asking for the information \end{DoxyParams}
+\hypertarget{server_8cpp_a5ecba3b644130eabad022566a59a3530}{
+\index{server.cpp@{server.cpp}!send\_\-msg@{send\_\-msg}}
+\index{send\_\-msg@{send\_\-msg}!server.cpp@{server.cpp}}
+\subsubsection[{send\_\-msg}]{\setlength{\rightskip}{0pt plus 5cm}int send\_\-msg (int {\em sockid}, \/  string {\em msg})}}
+\label{server_8cpp_a5ecba3b644130eabad022566a59a3530}
+
+
+Used to send a message to a client $|$ Creates a crappy form of a packet. 
+\begin{DoxyParams}{Parameters}
+\item[{\em sockid}]-\/ The sock to send on \item[{\em msg}]-\/ The message to send \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/ The result of the send 
+\end{DoxyReturn}
+\hypertarget{server_8cpp_a8e58653e1894c31c63bcf21a4d903100}{
+\index{server.cpp@{server.cpp}!send\_\-struct\_\-info@{send\_\-struct\_\-info}}
+\index{send\_\-struct\_\-info@{send\_\-struct\_\-info}!server.cpp@{server.cpp}}
+\subsubsection[{send\_\-struct\_\-info}]{\setlength{\rightskip}{0pt plus 5cm}void send\_\-struct\_\-info (string {\em nick}, \/  int {\em cli})}}
+\label{server_8cpp_a8e58653e1894c31c63bcf21a4d903100}
+
+
+When a client wants to send a function, this function will send over the needed information for the client to so. 
+\begin{DoxyParams}{Parameters}
+\item[{\em nick}]-\/ The nickname to find \item[{\em cli}]-\/ The client socket to work with \end{DoxyParams}
+\hypertarget{server_8cpp_acd529c52fdff0d47494fd915223c941b}{
+\index{server.cpp@{server.cpp}!str\_\-combine@{str\_\-combine}}
+\index{str\_\-combine@{str\_\-combine}!server.cpp@{server.cpp}}
+\subsubsection[{str\_\-combine}]{\setlength{\rightskip}{0pt plus 5cm}string str\_\-combine (int {\em pos}, \/  vector$<$ string $>$ {\em vec}, \/  char {\em token})}}
+\label{server_8cpp_acd529c52fdff0d47494fd915223c941b}
+
+
+Takes a split vector string and combines it back together. 
+\begin{DoxyParams}{Parameters}
+\item[{\em pos}]The position to start combining the vector at \item[{\em vec}]-\/ The vector to combine \item[{\em token}]-\/ The token to join on \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ The combined string 
+\end{DoxyReturn}
+\hypertarget{server_8cpp_aba2d00f8a99c233d28863c830df3fd15}{
+\index{server.cpp@{server.cpp}!str\_\-split@{str\_\-split}}
+\index{str\_\-split@{str\_\-split}!server.cpp@{server.cpp}}
+\subsubsection[{str\_\-split}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ str\_\-split (string {\em str}, \/  char {\em token})}}
+\label{server_8cpp_aba2d00f8a99c233d28863c830df3fd15}
+
+
+Takes a string and splits into a string vector. 
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]-\/ The string to split \item[{\em token}]-\/ The token to split on Default: ' ' \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$string$>$ -\/ The split string 
+\end{DoxyReturn}
+\hypertarget{server_8cpp_a175c09f4dd01c8ae3f1ef6392a8f865a}{
+\index{server.cpp@{server.cpp}!to\_\-lower@{to\_\-lower}}
+\index{to\_\-lower@{to\_\-lower}!server.cpp@{server.cpp}}
+\subsubsection[{to\_\-lower}]{\setlength{\rightskip}{0pt plus 5cm}string to\_\-lower (string {\em str})}}
+\label{server_8cpp_a175c09f4dd01c8ae3f1ef6392a8f865a}
+
+
+Takes a string and makes it all lower case. 
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]-\/ The string \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ The lowercase string 
+\end{DoxyReturn}
+\hypertarget{server_8cpp_ad4f0a0af56e6cbbe8c3421d8ec714fa6}{
+\index{server.cpp@{server.cpp}!V@{V}}
+\index{V@{V}!server.cpp@{server.cpp}}
+\subsubsection[{V}]{\setlength{\rightskip}{0pt plus 5cm}void V (int {\em id})}}
+\label{server_8cpp_ad4f0a0af56e6cbbe8c3421d8ec714fa6}
+
+
+Lets the lock go for the semaphore. 
+\begin{DoxyParams}{Parameters}
+\item[{\em id}]-\/ Which semaphore to let go \end{DoxyParams}

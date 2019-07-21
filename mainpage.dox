@@ -1,0 +1,24 @@
+/*! \mainpage Project 3
+ *
+ *
+ *  \section Techincal Information 
+ *    
+ *  This is a distrubed chat server. Clients connect to a LOOKUP_SERVER
+ *  which contains information about the clients connected to it
+ *  
+ *  Clients request the sockaddr_in information about the client they want to 
+ *  send a message to and follow through
+ *
+ *  \section Building and Running
+ *  
+ *  Use 'make all' to build the client and server 
+ *  Once completed start the server first by doing "./server"
+ *  Clients will then be able to connect to the server. 
+ *      Clients are launched using "./client <nick>" Where <nick> is the nickname
+ *      you want to use 
+ *
+ *  \section Closing Notes
+ *     
+ *  See the readme for a detailed view about what I was unable to implement :-)
+ *
+ */ 
