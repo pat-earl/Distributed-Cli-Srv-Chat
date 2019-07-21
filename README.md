@@ -37,4 +37,4 @@ python shm_clear.py will check for any shared memory and semaphores on the syste
 This project is not under active development and is hosted for archival purposes.   
 Please do not use this for academic dishonesty. Granted this was developed for a level-500 graduate course, I expect better of my graduate counter-parts ;-)
 
-Questions/Comments/Concerns? Up an an issue or contact me via my email listed on my github. Thanks :-)
+Questions/Comments/Concerns? Open up an an issue or contact me via my email listed on my github. Thanks :-)
